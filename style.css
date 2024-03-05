@@ -1,0 +1,15 @@
+.body{
+    height: 500px;
+    width: 350px;
+    background-color: rgb(47, 45, 45);
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.screen{
+    height: 90px;
+    width: 320px;
+    background-color: beige;
+    margin-top: 15px;
+}
