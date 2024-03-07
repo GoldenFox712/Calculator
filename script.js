@@ -104,21 +104,37 @@ function updateNumber2(){
 //Operate function
 
 function operate(num1, sign, num2){
-    if(sign == "+")
+    if(sign == "+"){
     displayContent.textContent = addNums(num1, num2);
     screenRefreshRequired = true;
+    operator = "";
+    number1 = parseFloat(displayContent.textContent);
+    number2 = null;
+    }
 
-    if(sign == "-")
+    else if(sign == "-"){
     displayContent.textContent = subtractNums(num1, num2);
     screenRefreshRequired = true;
+    operator = "";
+    number1 = parseFloat(displayContent.textContent);
+    number2 = null;
+    }
 
-    if(sign == "*")
+    else if(sign == "*"){
     displayContent.textContent = multiplyNums(num1, num2);
     screenRefreshRequired = true;
+    operator = "";
+    number1 = parseFloat(displayContent.textContent);
+    number2 = null;
+    }
 
-    if(sign == "/")
+    else if(sign == "/"){
     displayContent.textContent = divideNums(num1, num2);
     screenRefreshRequired = true;
+    operator = "";
+    number1 = parseFloat(displayContent.textContent);
+    number2 = null;
+    }
 }    
 
 
