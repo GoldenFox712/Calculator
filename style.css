@@ -18,6 +18,14 @@
     margin-top: 15px;
     margin-left: 15px;
     margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+#screen-content{
+    font-size: 50px;
+    margin-right: 10px;
 }
 
 .row0{
