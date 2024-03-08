@@ -264,7 +264,7 @@ function multiplyNums(num1, num2){
 
 function divideNums(num1, num2){
     if(number2 == 0)
-    return displayContent.textContent = "/ by 0: Error"
+    return displayContent.textContent = "/0: Error"
 
     else
     return num1 / num2
