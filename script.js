@@ -2,6 +2,8 @@ let number1 = null;
 let number2 = null;
 let operator = "";
 let screenRefreshRequired = false;
+let isThereDecimal = false;
+const maxScreenLength = 10;
 
 //Document references
 
@@ -46,7 +48,7 @@ clear.addEventListener("click", () => clearData())
 
 backspace.addEventListener("click", () => removeLast())
 
-decimal.addEventListener("click", () => updateDisplay("."))
+decimal.addEventListener("click", () => placeDecimal("."))
 
 divide.addEventListener("click", () => callOperator("/"))
 multiply.addEventListener("click", () => callOperator("*"))
@@ -68,9 +70,34 @@ function callOperator(sign){
     number1 = parseFloat(displayContent.textContent);
     operator = sign;
     screenRefreshRequired = true;
+    isThereDecimal = false;
 }
 
 //Auxilary functions
+
+function cutNumberLength(maxLength){
+    if(displayContent.textContent.length > maxLength)   
+    displayContent.textContent = displayContent.textContent.substring(0, maxLength)
+
+    else
+    return
+}
+
+function placeDecimal(content){
+    if(screenRefreshRequired == true){
+        displayContent.textContent = "";
+        screenRefreshRequired = false;
+    }
+
+    else if(displayContent.textContent.length == 10)
+    return
+
+    else if (isThereDecimal == true)
+    return
+
+    displayContent.textContent += content;
+    isThereDecimal = true;
+}
 
 function removeLast(){
     displayContent.textContent = displayContent.textContent.slice(0, -1)
@@ -94,7 +121,7 @@ function updateDisplay(content){
     else if(displayContent.textContent.length == 10)
     return
 
-    displayContent.textContent += content
+    displayContent.textContent += content;
 }
 
 function updateNumber2(){
@@ -106,34 +133,42 @@ function updateNumber2(){
 function operate(num1, sign, num2){
     if(sign == "+"){
     displayContent.textContent = addNums(num1, num2);
+    cutNumberLength(maxScreenLength);
     screenRefreshRequired = true;
     operator = "";
     number1 = parseFloat(displayContent.textContent);
     number2 = null;
+    isThereDecimal = false;
     }
 
     else if(sign == "-"){
     displayContent.textContent = subtractNums(num1, num2);
+    cutNumberLength(maxScreenLength);
     screenRefreshRequired = true;
     operator = "";
     number1 = parseFloat(displayContent.textContent);
     number2 = null;
+    isThereDecimal = false;
     }
 
     else if(sign == "*"){
     displayContent.textContent = multiplyNums(num1, num2);
+    cutNumberLength(maxScreenLength);
     screenRefreshRequired = true;
     operator = "";
     number1 = parseFloat(displayContent.textContent);
     number2 = null;
+    isThereDecimal = false;
     }
 
     else if(sign == "/"){
     displayContent.textContent = divideNums(num1, num2);
+    cutNumberLength(maxScreenLength);
     screenRefreshRequired = true;
     operator = "";
     number1 = parseFloat(displayContent.textContent);
     number2 = null;
+    isThereDecimal = false;
     }
 }    
 
