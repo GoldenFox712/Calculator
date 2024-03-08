@@ -57,21 +57,95 @@ add.addEventListener("click", () => callOperator("+"))
 
 equals.addEventListener("click", () => (updateNumber2(), operate(number1, operator, number2)))
 
+//Keyboard support
 
+window.addEventListener(
+    "keydown",
+    (event) => {
+        switch(event.key){
+            case "1":
+                updateDisplay("1")
+                break
 
+            case "2":
+                updateDisplay("2")
+                break
 
-function callOperator(sign){
+            case "3":
+                updateDisplay("3")    
+                break
 
-    if(number1 !== null){
-        number2 = parseFloat(displayContent.textContent);
-        operate(number1, operator, number2)
+            case "4":
+                updateDisplay("4")
+                break  
+                
+            case "5":
+                updateDisplay("5")
+                break    
+
+            case "6":
+                updateDisplay("6")
+                break    
+
+            case "7":
+                updateDisplay("7")
+                break    
+
+            case "8":
+                updateDisplay("8")
+                break    
+
+            case "9":
+                updateDisplay("9")
+                break    
+
+            case "0":
+                updateDisplay("0")
+                break    
+
+            case ".":
+                placeDecimal(".")
+                break  
+                
+            case "+":
+                callOperator("+")
+                break    
+
+            case "-":
+                callOperator("-")
+                break    
+
+            case "*":
+                callOperator("*")
+                break    
+
+            case "/":
+                callOperator("/")
+                break   
+                
+            case "=":
+                updateNumber2(),
+                operate(number1, operator, number2)
+                break    
+                    
+            case "Enter":
+                updateNumber2(),
+                operate(number1, operator, number2)
+                break    
+
+            case "Backspace":
+                removeLast()
+                break  
+
+            case "c":
+                clearData()
+                break  
+        }
     }
+)
 
-    number1 = parseFloat(displayContent.textContent);
-    operator = sign;
-    screenRefreshRequired = true;
-    isThereDecimal = false;
-}
+
+
 
 //Auxilary functions
 
@@ -196,3 +270,15 @@ function divideNums(num1, num2){
     return num1 / num2
 }
 
+function callOperator(sign){
+
+    if(number1 !== null){
+        number2 = parseFloat(displayContent.textContent);
+        operate(number1, operator, number2)
+    }
+
+    number1 = parseFloat(displayContent.textContent);
+    operator = sign;
+    screenRefreshRequired = true;
+    isThereDecimal = false;
+}
