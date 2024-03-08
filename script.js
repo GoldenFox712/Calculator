@@ -3,7 +3,7 @@ let number2 = null;
 let operator = "";
 let screenRefreshRequired = false;
 let isThereDecimal = false;
-const maxScreenLength = 10;
+const maxScreenLength = 12;
 
 //Document references
 
@@ -89,7 +89,7 @@ function placeDecimal(content){
         screenRefreshRequired = false;
     }
 
-    else if(displayContent.textContent.length == 10)
+    else if(displayContent.textContent.length == 8)
     return
 
     else if (isThereDecimal == true)
@@ -109,6 +109,7 @@ function clearData(){
     operator = "";
     displayContent.textContent = "";
     screenRefreshRequired = false;
+    isThereDecimal = false;
 }
 
 function updateDisplay(content){
@@ -118,7 +119,7 @@ function updateDisplay(content){
         screenRefreshRequired = false;
     }
 
-    else if(displayContent.textContent.length == 10)
+    else if(displayContent.textContent.length == 8)
     return
 
     displayContent.textContent += content;
