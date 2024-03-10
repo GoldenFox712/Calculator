@@ -3,6 +3,7 @@ let number2 = null;
 let operator = "";
 let screenRefreshRequired = false;
 let isThereDecimal = false;
+let isOperatorButtonToggled = false;
 const maxScreenLength = 12;
 
 //Document references
@@ -174,6 +175,15 @@ function placeDecimal(content){
 }
 
 function removeLast(){
+
+    if(displayContent.textContent == ""){
+        resetButtonToggle()
+        operator = "" 
+        number1 = 0
+        return
+    }
+
+
     displayContent.textContent = displayContent.textContent.slice(0, -1)
 }
 
@@ -184,6 +194,8 @@ function clearData(){
     displayContent.textContent = "";
     screenRefreshRequired = false;
     isThereDecimal = false;
+    isOperatorButtonToggled = false;
+    resetButtonToggle();
 }
 
 function updateDisplay(content){
@@ -203,6 +215,39 @@ function updateNumber2(){
     number2 = parseFloat(displayContent.textContent);
 }
 
+function buttonStyleToggle(button){
+    switch(button){
+
+        case "+":
+        add.classList.toggle("operator-toggle")
+        isOperatorButtonToggled = true
+        break
+
+        case "-":
+        subtract.classList.toggle("operator-toggle")
+        isOperatorButtonToggled = true
+        break
+
+        case "*":
+        multiply.classList.toggle("operator-toggle")
+        isOperatorButtonToggled = true
+        break
+
+        case "/":
+        divide.classList.toggle("operator-toggle")
+        isOperatorButtonToggled = true
+        break        
+        
+    }
+}
+
+function resetButtonToggle(){
+    add.classList.remove("operator-toggle")
+    subtract.classList.remove("operator-toggle")
+    multiply.classList.remove("operator-toggle")
+    divide.classList.remove("operator-toggle")
+}
+
 //Operate function
 
 function operate(num1, sign, num2){
@@ -214,6 +259,7 @@ function operate(num1, sign, num2){
     number1 = parseFloat(displayContent.textContent);
     number2 = null;
     isThereDecimal = false;
+    resetButtonToggle()
     }
 
     else if(sign == "-"){
@@ -224,6 +270,7 @@ function operate(num1, sign, num2){
     number1 = parseFloat(displayContent.textContent);
     number2 = null;
     isThereDecimal = false;
+    resetButtonToggle()
     }
 
     else if(sign == "*"){
@@ -234,6 +281,7 @@ function operate(num1, sign, num2){
     number1 = parseFloat(displayContent.textContent);
     number2 = null;
     isThereDecimal = false;
+    resetButtonToggle()
     }
 
     else if(sign == "/"){
@@ -244,6 +292,7 @@ function operate(num1, sign, num2){
     number1 = parseFloat(displayContent.textContent);
     number2 = null;
     isThereDecimal = false;
+    resetButtonToggle()
     }
 }    
 
@@ -275,10 +324,15 @@ function callOperator(sign){
     if(number1 !== null){
         number2 = parseFloat(displayContent.textContent);
         operate(number1, operator, number2)
+        operator = sign
+        resetButtonToggle()
+        buttonStyleToggle(operator)
+        return
     }
 
     number1 = parseFloat(displayContent.textContent);
     operator = sign;
+    buttonStyleToggle(operator)
     screenRefreshRequired = true;
     isThereDecimal = false;
 }
