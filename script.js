@@ -4,7 +4,8 @@ let operator = "";
 let screenRefreshRequired = false;
 let isThereDecimal = false;
 let isOperatorButtonToggled = false;
-const maxScreenLength = 12;
+const maxScreenLength = 11;
+let erroredOut = false;
 
 //Document references
 
@@ -159,7 +160,12 @@ function cutNumberLength(maxLength){
 }
 
 function placeDecimal(content){
-    if(screenRefreshRequired == true){
+    
+    if(erroredOut == true){
+        clearData()
+    }
+    
+    else if(screenRefreshRequired == true){
         displayContent.textContent = "";
         screenRefreshRequired = false;
     }
@@ -196,11 +202,16 @@ function clearData(){
     isThereDecimal = false;
     isOperatorButtonToggled = false;
     resetButtonToggle();
+    erroredOut = false;
 }
 
 function updateDisplay(content){
 
-    if(screenRefreshRequired == true){
+    if(erroredOut == true){
+        clearData()
+    }
+
+    else if(screenRefreshRequired == true){
         displayContent.textContent = "";
         screenRefreshRequired = false;
     }
@@ -251,7 +262,13 @@ function resetButtonToggle(){
 //Operate function
 
 function operate(num1, sign, num2){
-    if(sign == "+"){
+    if(number1 == null){
+        displayContent.textContent = "ERROR"
+        erroredOut = true;
+        return
+    }
+    
+    else if(sign == "+"){
     displayContent.textContent = addNums(num1, num2);
     cutNumberLength(maxScreenLength);
     screenRefreshRequired = true;
@@ -321,12 +338,23 @@ function divideNums(num1, num2){
 
 function callOperator(sign){
 
-    if(number1 !== null){
+    if(erroredOut == true){
+        clearData()
+        return
+    }
+
+    else if(number1 !== null){
         number2 = parseFloat(displayContent.textContent);
         operate(number1, operator, number2)
         operator = sign
         resetButtonToggle()
         buttonStyleToggle(operator)
+        return
+    }
+
+    else if(displayContent.textContent.length == ""){
+        displayContent.textContent = "Syntax Error";
+        erroredOut = true;
         return
     }
 
